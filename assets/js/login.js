@@ -36,7 +36,7 @@ $(function(){
     //  1.阻止默认行为
      e.preventDefault()
     //  2.发起ajax的post请求
-    const data = {username:$('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()}
+    let  data = {username:$('#form_reg [name=username]').val(),password:$('#form_reg [name=password]').val()}
 
      $.post('/api/reguser',data,function(res){
        if(res.status!==0) return layer.msg(res.message)
@@ -50,8 +50,8 @@ $(function(){
     // 阻止默认提交行为
     e.preventDefault()
     $.ajax({
+      url:'/api/login',
        method:'POST',
-       url:'/api/login',
       // 快速获取表单中的数据
        data:$(this).serialize(),
        success:function(res){
@@ -60,7 +60,7 @@ $(function(){
         // 将登录成功得到的token字符串保存到localStorge 中
          localStorage.setItem('token',res.token)
         //  跳转到后台主页
-           location.href = '/index.html'
+           location.href ='/index.html'
        }
     })
   }) 
